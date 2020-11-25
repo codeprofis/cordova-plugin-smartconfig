@@ -222,7 +222,13 @@ public class espSmartconfig extends CordovaPlugin {
         @Override
         public void onEsptouchResultAdded(final IEsptouchResult result) {
             String text = "bssid="+ result.getBssid()+",InetAddress="+result.getInetAddress().getHostAddress();
-            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, text);
+
+            JSONObject jresult = new JSONObject();
+            jresult.put("bssid", result.getBssid());
+            jresult.put("ip", result.getInetAddress().getHostAddress());
+
+
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, jresult);
             pluginResult.setKeepCallback(true);           // keep callback after this call
             //receivingCallbackContext.sendPluginResult(pluginResult);    //modified by lianghuiyuan
         }
